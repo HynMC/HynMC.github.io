@@ -1,0 +1,51 @@
+---
+import { site } from '../data/site.ts';
+
+const currentPath = Astro.url.pathname;
+const links = [
+    { label: 'Home', href: '/', match: '/' },
+    { label: 'Plugins', href: '/plugins/', match: '/plugins' },
+];
+---
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="brand" href="/" aria-label="HynMC home">
+            <img src="/logo.svg" alt="HynMC logo" class="brand-mark" />
+            <span>HynMC</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+            {links.map((link) => (
+                <a
+                    href={link.href}
+                    class:list={[
+                        'nav-link',
+                        { active: currentPath === link.match || (link.match !== '/' && currentPath.startsWith(link.match)) },
+                    ]}
+                >
+                    {link.label}
+                </a>
+            ))}
+            <a class="nav-github" href={site.github} target="_blank" rel="noreferrer">
+                GitHub <span aria-hidden="true">↗</span>
+            </a>
+        </nav>
+
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+<script>
+    const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+    const nav = document.querySelector<HTMLElement>('.main-nav');
+
+    toggle?.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        nav?.classList.toggle('is-open', !isOpen);
+    });
+</script>

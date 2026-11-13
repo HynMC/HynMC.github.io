@@ -1,0 +1,23 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import PluginCard from '../../components/PluginCard.astro';
+import { plugins } from '../../data/plugins';
+---
+
+<MainLayout title="Plugins — HynMC" description="Explore Minecraft plugins and tools by HynMC.">
+    <section class="page-hero">
+        <div class="container">
+            <p class="eyebrow">OUR PROJECTS</p>
+            <h1>Plugins<span>.</span></h1>
+            <p class="section-description">Explore tools and plugins currently being developed by HynMC.</p>
+        </div>
+    </section>
+    <section class="section page-content">
+        <div class="container">
+            <h1>No plugins available yet</h1> <!-- TODO -->
+            <div class="plugin-grid">
+                {plugins.map((plugin) => <PluginCard plugin={plugin} />)}
+            </div>
+        </div>
+    </section>
+</MainLayout>

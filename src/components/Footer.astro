@@ -1,0 +1,17 @@
+---
+import { site } from '../data/site.ts';
+---
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <a class="brand footer-brand" href="/">
+            <img src="/logo.svg" alt="HynMC logo" class="brand-mark" />
+            <span>HynMC</span>
+        </a>
+        <p>Building tools for better Minecraft server experiences.</p>
+        <div class="footer-bottom">
+            <span>© {new Date().getFullYear()} HynMC. All rights reserved.</span>
+            <a href={site.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+    </div>
+</footer>

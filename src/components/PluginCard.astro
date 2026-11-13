@@ -1,0 +1,25 @@
+---
+import type { Plugin } from '../data/plugins.ts';
+
+interface Props {
+    plugin: Plugin;
+}
+
+const { plugin } = Astro.props;
+---
+
+<article class="plugin-card">
+    <div class="plugin-card-top">
+        <img src="/logo.svg" alt="HynMC logo" class="plugin-icon" />
+        <span class="status"><span class="status-dot"></span>{plugin.status}</span>
+    </div>
+    <div>
+        <p class="eyebrow">{plugin.category}</p>
+        <h3>{plugin.name}</h3>
+        <p class="muted">{plugin.description}</p>
+    </div>
+    <div class="plugin-card-bottom">
+        <span class="version-label">Version <strong>{plugin.version}</strong></span>
+        <a class="text-link" href={`/plugins/${plugin.slug}/`}>Explore <span aria-hidden="true">→</span></a>
+    </div>
+</article>

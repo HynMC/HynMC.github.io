@@ -1,0 +1,45 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { plugins } from '../../data/plugins';
+
+export function getStaticPaths() {
+    return plugins.map((plugin) => ({
+        params: { slug: plugin.slug },
+        props: { plugin },
+    }));
+}
+
+const { plugin } = Astro.props;
+---
+
+<MainLayout title={`${plugin.name} — HynMC`} description={plugin.description}>
+    <section class="page-hero">
+        <div class="container">
+            <a class="back-link" href="/plugins/">← All plugins</a>
+            <p class="eyebrow">{plugin.category}</p>
+            <h1>{plugin.name}<span>.</span></h1>
+            <p class="section-description">{plugin.description}</p>
+            <div class="detail-tags">
+                <span class="status"><span class="status-dot"></span>{plugin.status}</span>
+                <span class="tag">Minecraft: {plugin.minecraft}</span>
+                <span class="tag">Version: {plugin.version}</span>
+            </div>
+            <div class="hero-actions detail-actions">
+                {plugin.releaseUrl ? (
+                    <a class="button button-primary" href={plugin.releaseUrl} target="_blank" rel="noreferrer">Download <span aria-hidden="true">↗</span></a>
+                ) : (
+                    <span class="button button-disabled">Release coming soon</span>
+                )}
+                {plugin.docsUrl && <a class="button button-secondary" href={plugin.docsUrl}>Documentation</a>}
+                {plugin.repository && <a class="button button-secondary" href={plugin.repository} target="_blank" rel="noreferrer">Source code ↗</a>}
+            </div>
+        </div>
+    </section>
+    <section class="section page-content">
+        <div class="container detail-panel">
+            <p class="eyebrow">ABOUT THIS PROJECT</p>
+            <h2>More details coming soon.</h2>
+            <p class="muted">Project information, supported versions, installation instructions and release notes will be added here as development progresses.</p>
+        </div>
+    </section>
+</MainLayout>
